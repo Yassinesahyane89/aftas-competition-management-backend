@@ -55,4 +55,15 @@ public class LevelController {
             return ResponseMessage.created(LevelResponseDTO.fromLevel(level1), "Level created successfully");
         }
     }
+
+    // update level
+    @PutMapping("/{id}")
+    public ResponseEntity updateLevel(@Valid @RequestBody LevelRequestDTO levelRequestDTO, @PathVariable Long id) {
+        Level level1 = levelService.updateLevel(levelRequestDTO.toLevel(), id);
+        if (level1 == null) {
+            return ResponseMessage.badRequest("Level not updated");
+        } else {
+            return ResponseMessage.created(LevelResponseDTO.fromLevel(level1), "Level updated successfully");
+        }
+    }
 }
