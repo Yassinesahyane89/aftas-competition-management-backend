@@ -30,6 +30,14 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public Level addLevel(Level level) {
+        List<Level> levels = getAllLevels();
+        if(levels.isEmpty()){
+            level.setCode(1);
+            return levelRepository.save(level);
+        }
+        // get all levels that are have point greater than the new level point
+
+
         return null;
     }
 
