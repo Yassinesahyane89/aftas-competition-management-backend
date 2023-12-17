@@ -3,9 +3,11 @@ package com.example.demo.web.rest.controller;
 import com.example.demo.entity.Level;
 import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.LevelService;
+import com.example.demo.web.DTO.response.LevelResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,10 @@ public class LevelController {
         if(levels.isEmpty()) {
             return ResponseMessage.notFound("Levels not found");
         }else {
+            List<LevelResponseDTO> levelResponseDTOS = new ArrayList<>();
+            for(Level level: levels){
+                levelResponseDTOS.add(LevelResponseDTO.fromLevel(level));
+            }
             return ResponseMessage.ok(levels, "Success");
         }
     }
