@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.entity.Level;
+import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.LevelRepository;
 import com.example.demo.service.LevelService;
@@ -56,11 +57,32 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public Level updateLevel(Level level, Long id) {
-        return null;
+        Level existingLevel = getLevelById(id);
+        existingLevel.setDescription(level.getDescription());
+        // check if point is greater than previous level and less than next level
+        List<Level> levels1 = levelRepository.findAll();
+        int index = existingLevel.getCode()-1;
+        if(index==0){
+            if(level.getPoint() >= levels1.get((index+1)).getPoint()) {
+                throw new ResolutionException("Point must be less than " + levels1.get((index+1)).getPoint());
+            }
+        }else if(index==levels1.size()-1) {
+            if (level.getPoint() <= levels1.get((index - 1)).getPoint()) {
+                throw new ResolutionException("Point must be greater than " + levels1.get((index - 1)).getPoint());
+            }
+        }else{
+            if(level.getPoint() >= levels1.get((index+1)).getPoint()) {
+                throw new OperationException("Point must be less than " + levels1.get((index+1)).getPoint());
+            }
+            if(level.getPoint() <= levels1.get((index-1)).getPoint()) {
+                throw new OperationException("Point must be greater than " + levels1.get((index-1)).getPoint());
+            }
+        }
+        existingLevel.setPoint(level.getPoint());
+        return levelRepository.save(existingLevel);
     }
 
     @Override
     public void deleteLevel(Long id) {
-
     }
 }
