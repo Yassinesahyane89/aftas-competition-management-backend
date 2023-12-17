@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface LevelRepository extends JpaRepository<Level, Long> {
     List<Level> findAllByPointGreaterThan(Integer point);
+    Level findByCode(Integer code);
 }
