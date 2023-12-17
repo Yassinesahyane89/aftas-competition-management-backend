@@ -21,7 +21,11 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public List<Level> getAllLevels() {
-        return null;
+        List<Level> levels =levelRepository.findAll();
+        if(levels.isEmpty()){
+            throw new ResourceNotFountException("There is no level");
+        }
+        return levels;
     }
 
     @Override
