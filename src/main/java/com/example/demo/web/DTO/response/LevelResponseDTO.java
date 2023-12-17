@@ -1,5 +1,19 @@
 package com.example.demo.web.DTO.response;
 
-public record LevelResponseDTO (){
+import com.example.demo.entity.Level;
 
+public record LevelResponseDTO (
+        Long id,
+        Integer code,
+        String description,
+        Integer point
+){
+    public LevelResponseDTO fromLevel(Level level){
+        return new LevelResponseDTO(
+                level.getId(),
+                level.getCode(),
+                level.getDescription(),
+                level.getPoint()
+        );
+    }
 }
