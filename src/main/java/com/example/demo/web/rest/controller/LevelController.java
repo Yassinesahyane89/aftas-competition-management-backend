@@ -3,7 +3,9 @@ package com.example.demo.web.rest.controller;
 import com.example.demo.entity.Level;
 import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.LevelService;
+import com.example.demo.web.DTO.request.LevelRequestDTO;
 import com.example.demo.web.DTO.response.LevelResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,16 @@ public class LevelController {
     public ResponseEntity getLevelById(@PathVariable Long id) {
         Level level = levelService.getLevelById(id);
         return ResponseMessage.ok(LevelResponseDTO.fromLevel(level), "Success");
+    }
+
+    // add level
+    @PostMapping
+    public ResponseEntity addLevel(@Valid @RequestBody LevelRequestDTO levelRequestDTO) {
+        Level level1 = levelService.addLevel(levelRequestDTO.toLevel());
+        if (level1 == null) {
+            return ResponseMessage.badRequest("Level not created");
+        } else {
+            return ResponseMessage.created(LevelResponseDTO.fromLevel(level1), "Level created successfully");
+        }
     }
 }
