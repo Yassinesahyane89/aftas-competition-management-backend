@@ -40,6 +40,6 @@ public class LevelController {
     @GetMapping("/{id}")
     public ResponseEntity getLevelById(@PathVariable Long id) {
         Level level = levelService.getLevelById(id);
-        return ResponseMessage.ok(level, "Success");
+        return ResponseMessage.ok(LevelResponseDTO.fromLevel(level), "Success");
     }
 }
