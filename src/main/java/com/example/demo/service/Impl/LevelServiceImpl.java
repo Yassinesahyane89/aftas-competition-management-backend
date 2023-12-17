@@ -5,10 +5,12 @@ import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.LevelRepository;
 import com.example.demo.service.LevelService;
+import org.springframework.stereotype.Service;
 
 import java.lang.module.ResolutionException;
 import java.util.List;
 
+@Service
 public class LevelServiceImpl implements LevelService {
     private LevelRepository levelRepository;
 
