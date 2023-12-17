@@ -59,6 +59,11 @@ public class LevelServiceImpl implements LevelService {
         existingLevel.setDescription(level.getDescription());
         // check if point is greater than previous level and less than next level
         List<Level> levels1 = levelRepository.findAll();
+        if(levels1.size()==1){
+            existingLevel.setPoint(level.getPoint());
+            return levelRepository.save(existingLevel);
+        }
+
         int index = existingLevel.getCode()-1;
         if(index==0){
             if(level.getPoint() >= levels1.get((index+1)).getPoint()) {
