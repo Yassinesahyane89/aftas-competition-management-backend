@@ -66,4 +66,12 @@ public class LevelController {
             return ResponseMessage.created(LevelResponseDTO.fromLevel(level1), "Level updated successfully");
         }
     }
+
+    // delete level
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteLevel(@PathVariable Long id) {
+            levelService.deleteLevel(id);
+            return ResponseMessage.ok(null,"Level deleted successfully");
+        }
+    }
 }
