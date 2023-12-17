@@ -13,7 +13,6 @@ public record LevelRequestDTO(
         String description,
 
         @NotNull(message = "point is required")
-        @NotBlank(message = "point is required")
         @Min(value = 0, message = "point must be greater than 0")
         Integer point
 ) {
