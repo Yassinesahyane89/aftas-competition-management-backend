@@ -26,4 +26,9 @@ public class ResponseMessage {
     public static ResponseEntity<?> created(Object data, String message) {
         return ResponseEntity.ok(new ResponseMessage(message, data));
     }
+
+    // bad request
+    public static ResponseEntity<?> badRequest(String message) {
+        return ResponseEntity.badRequest().body(new ResponseMessage(message));
+    }
 }
