@@ -1,6 +1,7 @@
 package com.example.demo.handler.response;
 
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
 
 @Data
 public class ResponseMessage {
@@ -14,5 +15,10 @@ public class ResponseMessage {
 
     public ResponseMessage(String message) {
         this.message = message;
+    }
+
+    // ok
+    public static ResponseEntity<?> ok(Object data, String message) {
+        return ResponseEntity.ok(new ResponseMessage(message, data));
     }
 }
