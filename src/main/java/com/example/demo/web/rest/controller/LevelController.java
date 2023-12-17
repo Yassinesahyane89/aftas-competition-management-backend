@@ -29,4 +29,11 @@ public class LevelController {
             return ResponseMessage.ok(levels, "Success");
         }
     }
+
+    // get level by id
+    @GetMapping("/{id}")
+    public ResponseEntity getLevelById(@PathVariable Long id) {
+        Level level = levelService.getLevelById(id);
+        return ResponseMessage.ok(level, "Success");
+    }
 }
