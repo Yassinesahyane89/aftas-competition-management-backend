@@ -72,6 +72,5 @@ public class LevelController {
     public ResponseEntity deleteLevel(@PathVariable Long id) {
             levelService.deleteLevel(id);
             return ResponseMessage.ok(null,"Level deleted successfully");
-        }
     }
 }
