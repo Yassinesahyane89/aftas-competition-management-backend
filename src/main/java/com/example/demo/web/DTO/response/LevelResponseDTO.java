@@ -8,7 +8,7 @@ public record LevelResponseDTO (
         String description,
         Integer point
 ){
-    public LevelResponseDTO fromLevel(Level level){
+    public static LevelResponseDTO fromLevel(Level level){
         return new LevelResponseDTO(
                 level.getId(),
                 level.getCode(),
