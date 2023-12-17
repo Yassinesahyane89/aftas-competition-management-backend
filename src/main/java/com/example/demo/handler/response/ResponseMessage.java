@@ -21,4 +21,9 @@ public class ResponseMessage {
     public static ResponseEntity<?> ok(Object data, String message) {
         return ResponseEntity.ok(new ResponseMessage(message, data));
     }
+
+    // created
+    public static ResponseEntity<?> created(Object data, String message) {
+        return ResponseEntity.ok(new ResponseMessage(message, data));
+    }
 }
