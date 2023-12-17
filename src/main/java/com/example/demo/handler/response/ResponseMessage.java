@@ -31,4 +31,9 @@ public class ResponseMessage {
     public static ResponseEntity<?> badRequest(String message) {
         return ResponseEntity.badRequest().body(new ResponseMessage(message));
     }
+
+    // not found
+    public static ResponseEntity<?> notFound(String message) {
+        return ResponseEntity.notFound().build();
+    }
 }
