@@ -12,4 +12,10 @@ public class CustomExceptionHandler {
         ResponseMessage responseMessage = new ResponseMessage(e.getMessage());
         return ResponseEntity.badRequest().body(responseMessage);
     }
+
+    @ExceptionHandler(ResourceNotFountException.class)
+    public ResponseEntity<ResponseMessage> handleResourceNotFoundException(ResourceNotFountException e){
+        ResponseMessage responseMessage = new ResponseMessage(e.getMessage());
+        return ResponseEntity.badRequest().body(responseMessage);
+    }
 }
