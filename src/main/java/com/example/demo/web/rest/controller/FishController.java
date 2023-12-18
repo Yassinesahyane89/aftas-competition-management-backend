@@ -35,7 +35,7 @@ public class FishController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity getFishById(@PathVariable Long id) {
         Fish fish = fishService.getFishById(id);
         if(fish == null) {
