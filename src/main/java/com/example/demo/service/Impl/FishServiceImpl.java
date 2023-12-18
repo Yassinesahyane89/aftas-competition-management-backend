@@ -5,9 +5,11 @@ import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.FishRepository;
 import com.example.demo.service.FishService;
 import com.example.demo.service.LevelService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FishServiceImpl implements FishService {
     private final FishRepository fishRepository;
     private final LevelService levelService;
