@@ -34,6 +34,10 @@ public class LevelServiceImpl implements LevelService {
             level.setCode(1);
             return levelRepository.save(level);
         }
+        // check if this point exist
+        if(levelRepository.findByPoint(level.getPoint()) != null){
+            throw new OperationException("Point already exist");
+        }
         // get all levels that are have point greater than the new level point
         List<Level> levels1 = levelRepository.findAllByCodeGreaterThan(level.getPoint());
         // if there is no level with point greater than the new level point
