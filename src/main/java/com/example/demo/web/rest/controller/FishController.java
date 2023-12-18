@@ -3,6 +3,7 @@ package com.example.demo.web.rest.controller;
 import com.example.demo.entity.Fish;
 import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.FishService;
+import com.example.demo.web.DTO.request.FishRequestDTO;
 import com.example.demo.web.DTO.response.FishResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,8 @@ public class FishController {
     }
 
     @PostMapping
-    public ResponseEntity addFish(@Valid @RequestBody Fish fish) {
-        Fish newFish = fishService.addFish(fish);
+    public ResponseEntity addFish(@Valid @RequestBody FishRequestDTO fishRequestDTO) {
+        Fish newFish = fishService.addFish(fishRequestDTO.toFish());
         if(newFish == null) {
             return ResponseMessage.badRequest("Fish not created");
         }else {
