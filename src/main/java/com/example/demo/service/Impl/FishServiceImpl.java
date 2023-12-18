@@ -36,7 +36,7 @@ public class FishServiceImpl implements FishService {
         }
 
         // check if level is already exist
-        if(levelService.getLevelById(fish.getLevel().getId()) == null) {
+        if(levelService.getLevelById(fish.getLevel().getId()) == null && fish.getLevel().getId() != null) {
             throw new ResourceNotFountException("Level id " + fish.getLevel().getId() + " not found");
         }
 
