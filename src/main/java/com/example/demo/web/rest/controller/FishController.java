@@ -44,4 +44,13 @@ public class FishController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity addFish(@RequestBody Fish fish) {
+        Fish newFish = fishService.addFish(fish);
+        if(newFish == null) {
+            return ResponseMessage.badRequest("Fish not created");
+        }else {
+            return ResponseMessage.created(FishResponseDTO.fromFish(newFish), "Fish created successfully");
+        }
+    }
 }
