@@ -43,7 +43,20 @@ public class FishServiceImpl implements FishService {
 
     @Override
     public Fish updateFish(Fish fish, Long id) {
-        return null;
+        Fish existingFish = getFishById(id);
+        // check if fish name is not already exist and the name is not the same as the existing fish name
+        if(fishRepository.findByName(fish.getName()) != null && !existingFish.getName().equals(fish.getName())){
+            throw new ResourceNotFountException("Fish name " + fish.getName() + " already exist");
+        }
+        existingFish.setName(fish.getName());
+
+        // check if level is already exist
+        if(levelService.getLevelById(fish.getLevel().getId()) == null) {
+            throw new ResourceNotFountException("Level id " + fish.getLevel().getId() + " not found");
+        }
+        existingFish.setLevel(fish.getLevel());
+
+        return fishRepository.save(existingFish);
     }
 
     @Override
