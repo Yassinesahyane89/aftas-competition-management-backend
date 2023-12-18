@@ -25,7 +25,7 @@ public class Fish {
     @Column(unique = true)
     private String name;
 
-    private double weight;
+    private double averageWeight;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
