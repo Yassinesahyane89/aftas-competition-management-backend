@@ -9,4 +9,6 @@ public interface LevelRepository extends JpaRepository<Level, Long> {
     List<Level> findAllByCodeGreaterThan(Integer code);
     Level findByCode(Integer code);
 
+    Level findByPoint(Integer point);
+
 }
