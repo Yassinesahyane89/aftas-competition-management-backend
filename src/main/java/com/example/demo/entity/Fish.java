@@ -36,4 +36,7 @@ public class Fish {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date updatedAt;
+
+    @ManyToOne
+    private Level level;
 }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,6 +28,9 @@ public class Level {
     private String description;
 
     private Integer point;
+
+    @OneToMany(mappedBy = "level")
+    private List<Fish> fish;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
