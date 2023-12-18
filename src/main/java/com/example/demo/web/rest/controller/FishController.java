@@ -63,4 +63,15 @@ public class FishController {
             return ResponseMessage.created(FishResponseDTO.fromFish(updatedFish), "Fish updated successfully");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteFish(@PathVariable Long id) {
+        Fish fish = fishService.getFishById(id);
+        if(fish == null) {
+            return ResponseMessage.notFound("Fish not found");
+        }else {
+            fishService.deleteFish(id);
+            return ResponseMessage.ok(null,"Fish deleted successfully");
+        }
+    }
 }
