@@ -8,7 +8,7 @@ import com.example.demo.service.FishService;
 import java.util.List;
 
 public class FishServiceImpl implements FishService {
-    private FishRepository fishRepository;
+    private final FishRepository fishRepository;
 
     public FishServiceImpl(FishRepository fishRepository) {
         this.fishRepository = fishRepository;
@@ -20,7 +20,7 @@ public class FishServiceImpl implements FishService {
 
     @Override
     public List<Fish> getAllFishes() {
-        return null;
+        return fishRepository.findAll();
     }
 
     @Override
