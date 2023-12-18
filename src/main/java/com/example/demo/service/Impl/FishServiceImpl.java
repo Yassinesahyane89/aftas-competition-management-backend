@@ -4,14 +4,17 @@ import com.example.demo.entity.Fish;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.FishRepository;
 import com.example.demo.service.FishService;
+import com.example.demo.service.LevelService;
 
 import java.util.List;
 
 public class FishServiceImpl implements FishService {
     private final FishRepository fishRepository;
+    private final LevelService levelService;
 
-    public FishServiceImpl(FishRepository fishRepository) {
+    public FishServiceImpl(FishRepository fishRepository, LevelService levelService) {
         this.fishRepository = fishRepository;
+        this.levelService = levelService;
     }
     @Override
     public Fish getFishById(Long id) {
