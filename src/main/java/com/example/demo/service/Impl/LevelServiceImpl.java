@@ -5,6 +5,7 @@ import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.LevelRepository;
 import com.example.demo.service.LevelService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.lang.module.ResolutionException;
@@ -57,12 +58,20 @@ public class LevelServiceImpl implements LevelService {
         return levelRepository.save(level);
     }
 
+    @Transactional
     @Override
     public Level updateLevel(Level level, Long id) {
         Level existingLevel = getLevelById(id);
         existingLevel.setDescription(level.getDescription());
-        // check if point is greater than previous level and less than next level
+
+        if(existingLevel.getPoint() == level.getPoint()){
+            return levelRepository.save(existingLevel);
+        }
+
+        // get all levels
         List<Level> levels1 = levelRepository.findAll();
+
+        // check if point is greater than previous level and less than next level
         if(levels1.size()==1){
             existingLevel.setPoint(level.getPoint());
             return levelRepository.save(existingLevel);
