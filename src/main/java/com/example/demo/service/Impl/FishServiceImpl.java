@@ -61,6 +61,7 @@ public class FishServiceImpl implements FishService {
 
     @Override
     public void deleteFish(Long id) {
-
+        getFishById(id);
+        fishRepository.deleteById(id);
     }
 }
