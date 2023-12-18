@@ -20,12 +20,14 @@ public record FishRequestDTO(
         double averageWeight,
         Long levelId
 ) {
-     public static Fish toFish(FishRequestDTO fishRequestDTO) {
+     public Fish toFish() {
       Fish.FishBuilder fish =  Fish.builder()
-              .name(fishRequestDTO.name())
-              .averageWeight(fishRequestDTO.averageWeight());
-                if(fishRequestDTO.levelId() != null) {
-                    fish.level(Level.builder().id(fishRequestDTO.levelId()).build());
+              .name(name())
+              .averageWeight(averageWeight());
+                if(levelId() != null) {
+                    fish.level(Level.builder().id(levelId()).build());
+                }else{
+                    fish.level(Level.builder().id(null).build());
                 }
                 return fish.build();
      }
