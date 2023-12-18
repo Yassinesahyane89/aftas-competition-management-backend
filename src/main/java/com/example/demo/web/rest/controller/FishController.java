@@ -53,4 +53,14 @@ public class FishController {
             return ResponseMessage.created(FishResponseDTO.fromFish(newFish), "Fish created successfully");
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateFish(@RequestBody Fish fish, @PathVariable Long id) {
+        Fish updatedFish = fishService.updateFish(fish, id);
+        if(updatedFish == null) {
+            return ResponseMessage.badRequest("Fish not updated");
+        }else {
+            return ResponseMessage.created(FishResponseDTO.fromFish(updatedFish), "Fish updated successfully");
+        }
+    }
 }
