@@ -5,10 +5,7 @@ import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.FishService;
 import com.example.demo.web.DTO.response.FishResponseDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +33,15 @@ public class FishController {
             return ResponseMessage.ok(fishResponseDTOS, "Success");
         }
     }
+
+    @GetMapping
+    public ResponseEntity getFishById(@PathVariable Long id) {
+        Fish fish = fishService.getFishById(id);
+        if(fish == null) {
+            return ResponseMessage.notFound("Fish not found");
+        }else {
+            return ResponseMessage.ok(FishResponseDTO.fromFish(fish), "Success");
+        }
+    }
+
 }
