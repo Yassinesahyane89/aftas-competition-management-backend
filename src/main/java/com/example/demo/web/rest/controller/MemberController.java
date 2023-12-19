@@ -54,4 +54,14 @@ public class MemberController {
             return ResponseMessage.created(MemberResponseDTO.fromMember(member1), "Member created successfully");
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateMember(@RequestBody Member member, @PathVariable Long id) {
+        Member member1 = memberService.updateMember(member, id);
+        if(member1 == null) {
+            return ResponseMessage.badRequest("Member not updated");
+        }else {
+            return ResponseMessage.ok(MemberResponseDTO.fromMember(member1), "Member updated successfully");
+        }
+    }
 }
