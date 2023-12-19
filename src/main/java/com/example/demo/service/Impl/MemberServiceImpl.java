@@ -47,7 +47,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member updateMember(Member member, Long id) {
-        return null;
+        // check if member is exist
+        Member existingMember = getMemberById(id);
+
+        // update member
+        existingMember.setFirstName(member.getFirstName());
+        existingMember.setFamilyName(member.getFamilyName());
+        existingMember.setNationality(member.getNationality());
+        existingMember.setIdentityDocumentType(member.getIdentityDocumentType());
+
+        // save member
+        return memberRepository.save(existingMember);
     }
 
     @Override
