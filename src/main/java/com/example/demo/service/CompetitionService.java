@@ -10,7 +10,7 @@ public interface CompetitionService {
     Competition getCompetitionByCode(String code);
     List<Competition> getAllCompetitions();
     Competition addCompetition(Competition competition);
-    Competition updateCompetition(Competition competition, Long id);
+    Competition updateCompetition(Competition competition, String code);
     void deleteCompetition(Long id);
     Ranking registerMemberForCompetition(Ranking ranking);
     List<Ranking> registerMembersForCompetition(List<Ranking> rankings);
