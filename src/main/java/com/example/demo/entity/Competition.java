@@ -21,10 +21,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Competition {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
     private String code;
 
     private LocalDate date;
@@ -33,11 +29,11 @@ public class Competition {
 
     private LocalTime endTime;
 
+    private int numberOfParticipants;
+
     private String location;
 
     private int amount;
-
-    private int numberOfParticipants;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
