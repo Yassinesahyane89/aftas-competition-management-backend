@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.entity.Ranking;
+import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.RankingRepository;
 import com.example.demo.service.RankingService;
 
@@ -14,12 +15,16 @@ public class RankingServiceImpl implements RankingService {
     }
     @Override
     public Ranking getRankingByCompetitionCodeAndMemberNumber(String competitionCode, Long memberNumber) {
-        return null;
+        Ranking ranking = rankingRepository.findAllByMemberMembershipNumberAndCompetitionCode(memberNumber, competitionCode);
+        if(ranking == null) {
+            throw new ResourceNotFountException("Ranking for competition code " + competitionCode + " and member number " + memberNumber + " not found");
+        }
+        return ranking;
     }
 
     @Override
     public List<Ranking> getAllRankings() {
-        return null;
+        return rankingRepository.findAll();
     }
 
     @Override
@@ -33,8 +38,12 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public void deleteRanking(String competitionCode, Long memberNumber) {
+    public List<Ranking> updateRankOfMemberInCompetition(String competitionCode) {
+        return null;
+    }
 
+    @Override
+    public void deleteRanking(String competitionCode, Long memberNumber) {
     }
 
     @Override
