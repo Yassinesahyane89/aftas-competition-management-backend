@@ -8,6 +8,7 @@ import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.CompetitionRepository;
 import com.example.demo.service.CompetitionService;
 import com.example.demo.service.MemberService;
+import com.example.demo.service.RankingService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,9 +18,12 @@ public class CompetitionServiceImpl implements CompetitionService {
     private final CompetitionRepository competitionRepository;
     private final MemberService memberService;
 
-    public CompetitionServiceImpl(CompetitionRepository competitionRepository, MemberService memberService) {
+    private final RankingService rankingService;
+
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository, MemberService memberService, RankingService rankingService) {
         this.competitionRepository = competitionRepository;
         this.memberService = memberService;
+        this.rankingService = rankingService;
     }
     @Override
     public Competition getCompetitionByCode(String code) {
@@ -142,7 +146,32 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public List<Ranking> registerMembersForCompetition(List<Ranking> rankings) {
-        return null;
+        // check if the competition exist
+        Competition competition = getCompetitionByCode(rankings.get(0).getCompetition().getCode());
+
+        // check if the competition is in the future date at least 1 day
+        if(competition.getStartTime().isBefore(competition.getStartTime().minusHours(24))){
+            throw new OperationException("You can not register for competition that is less than 1 day from now");
+        }
+
+        // check if the competition is full
+        if(competition.getRanking().size() >= competition.getNumberOfParticipants()){
+            throw new OperationException("Competition is full");
+        }
+
+
+        for(Ranking ranking : rankings){
+            // check if the member exist
+            Member member = memberService.getMemberById(ranking.getMember().getMembershipNumber());
+
+            // check if the member is already registered for the competition
+            if(competition.getRanking().stream().anyMatch(ranking1 -> ranking1.getMember().getMembershipNumber().equals(member.getMembershipNumber()))){
+                throw new OperationException("Member already registered for the competition");
+            }
+        }
+
+        // save the rankings
+        return rankingService.addRankings(rankings);
     }
 
     @Override
