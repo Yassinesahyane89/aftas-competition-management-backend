@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,5 +21,10 @@ public class Ranking {
     private Integer rank;
 
     private Integer score;
+
+    @ManyToOne
+    @MapsId("competitionCode")
+    @JoinColumn(name = "competition_code")
+    private Competition competition;
 
 }

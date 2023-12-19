@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,6 +35,9 @@ public class Competition {
     private String location;
 
     private int amount;
+
+    @OneToMany(mappedBy = "competition")
+    private List<Ranking> ranking;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
