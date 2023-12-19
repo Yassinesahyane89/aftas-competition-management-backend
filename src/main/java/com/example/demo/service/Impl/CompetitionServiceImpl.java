@@ -19,8 +19,12 @@ public class CompetitionServiceImpl implements CompetitionService {
         this.competitionRepository = competitionRepository;
     }
     @Override
-    public Competition getCompetitionById(Long id) {
-        return competitionRepository.findById(id).orElseThrow(() -> new ResourceNotFountException("Competition id " + id + " not found"));
+    public Competition getCompetitionByCode(String code) {
+        Competition competition = competitionRepository.findByCode(code);
+        if(competition == null){
+            throw new ResourceNotFountException("Competition code " + code + " not found");
+        }
+        return competition;
     }
 
     @Override
@@ -114,7 +118,8 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Ranking registerMemberForCompetition(Ranking ranking) {
-        return null;
+        // check if the competition exist
+        Competition competition = getCompetitionById(ranking.getCompetition().getId());
     }
 
     @Override
