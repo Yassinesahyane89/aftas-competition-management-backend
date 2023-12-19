@@ -69,7 +69,11 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public List<Ranking> getRankingsByCompetitionCode(String competitionCode) {
-        return null;
+        List<Ranking> rankings = rankingRepository.findAllByCompetitionCode(competitionCode);
+        if (rankings == null) {
+            throw new ResourceNotFountException("Rankings for competition code " + competitionCode + " not found");
+        }
+        return rankings;
     }
 
     @Override
