@@ -72,8 +72,8 @@ public class MemberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateMember(@RequestBody Member member, @PathVariable Long id) {
-        Member member1 = memberService.updateMember(member, id);
+    public ResponseEntity updateMember(@Valid @RequestBody MemberRequestDTO memberRequestDTO, @PathVariable Long id) {
+        Member member1 = memberService.updateMember(memberRequestDTO.toMember(), id);
         if(member1 == null) {
             return ResponseMessage.badRequest("Member not updated");
         }else {
