@@ -9,7 +9,7 @@ public interface RankingService {
     List<Ranking> getAllRankings();
     Ranking addRanking(Ranking ranking);
     List<Ranking> addRankings(List<Ranking> rankings);
-    Ranking updateRanking(Ranking ranking, String competitionCode, Long memberNumber);
+    Ranking updateScoreOfMemberInCompetition(String competitionCode, Long memberNumber, Integer score);
     List<Ranking> updateRankOfMemberInCompetition(String competitionCode);
     void deleteRanking(String competitionCode, Long memberNumber);
 
