@@ -9,4 +9,5 @@ import java.util.List;
 public interface RankingRepository extends JpaRepository<Ranking, RankId> {
     Ranking findAllByMemberMembershipNumberAndCompetitionCode(Long memberNumber, String competitionCode);
     List<Ranking> findAllByCompetitionCode(String competitionCode);
+    List<Ranking> findAllByMemberMembershipNumber(Long memberNumber);
 }
