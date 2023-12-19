@@ -37,7 +37,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> getMembersNotInCompetition(String code) {
-        return null;
+        List<Member> members = memberRepository.findAllNotInCompetition(code);
+        if(members == null){
+            throw new ResourceNotFountException("There is no members not in competition code " + code);
+        }
+        return members;
     }
 
     @Override
