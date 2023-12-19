@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
         member.setIdentityNumber(java.util.UUID.randomUUID().toString());
 
         // add membership number integer and must be unique
-        member.setMembershipNumber((int) (memberRepository.count() + 1));
+        member.setMembershipNumber(memberRepository.count() + 1);
 
         return memberRepository.save(member);
     }
