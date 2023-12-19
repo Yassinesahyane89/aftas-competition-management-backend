@@ -7,6 +7,8 @@ import java.util.List;
 public interface MemberService {
     Member getMemberById(Long id);
     List<Member> getAllMembers();
+    List<Member> getMembersByCompetitionCode(String code);
+    List<Member> getMembersNotInCompetition(String code);
     List<Member> findByFirstNameOrMembershipNumberOrFamilyName(String searchTerm);
     Member addMember(Member member);
     Member updateMember(Member member, Long id);
