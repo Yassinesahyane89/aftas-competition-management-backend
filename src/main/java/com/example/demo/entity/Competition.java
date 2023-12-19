@@ -39,6 +39,9 @@ public class Competition {
     @OneToMany(mappedBy = "competition")
     private List<Ranking> ranking;
 
+    @OneToMany(mappedBy = "competition")
+    private List<Hunting> hunting;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)

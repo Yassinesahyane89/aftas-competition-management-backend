@@ -19,4 +19,7 @@ public class Hunting {
     private Integer id;
 
     private Integer numberOfHunters;
+
+    @ManyToOne
+    private Competition competition;
 }
