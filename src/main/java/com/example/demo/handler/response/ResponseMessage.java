@@ -1,6 +1,7 @@
 package com.example.demo.handler.response;
 
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @Data
@@ -34,6 +35,6 @@ public class ResponseMessage {
 
     // not found
     public static ResponseEntity<?> notFound(String message) {
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.NOT_FOUND);
     }
 }
