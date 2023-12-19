@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Data
@@ -39,6 +40,9 @@ public class Member {
 
     @Column(unique = true)
     private String identityNumber;
+
+    @OneToMany(mappedBy = "member")
+    private List<Ranking> ranking;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
