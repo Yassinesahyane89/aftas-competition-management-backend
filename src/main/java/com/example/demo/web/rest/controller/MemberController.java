@@ -3,7 +3,9 @@ package com.example.demo.web.rest.controller;
 import com.example.demo.entity.Member;
 import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.MemberService;
+import com.example.demo.web.DTO.request.MemberRequestDTO;
 import com.example.demo.web.DTO.response.MemberResponseDTO;
+import jakarta.validation.Valid;
 import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,8 +62,8 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity addMember(@RequestBody Member member) {
-        Member member1 = memberService.addMember(member);
+    public ResponseEntity addMember(@Valid @RequestBody MemberRequestDTO memberRequestDTO) {
+        Member member1 = memberService.addMember(memberRequestDTO.toMember());
         if(member1 == null) {
             return ResponseMessage.badRequest("Member not created");
         }else {
