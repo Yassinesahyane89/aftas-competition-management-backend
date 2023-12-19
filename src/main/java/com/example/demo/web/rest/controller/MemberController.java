@@ -44,4 +44,14 @@ public class MemberController {
             return ResponseMessage.ok(MemberResponseDTO.fromMember(member), "Success");
         }
     }
+
+    @PostMapping
+    public ResponseEntity addMember(@RequestBody Member member) {
+        Member member1 = memberService.addMember(member);
+        if(member1 == null) {
+            return ResponseMessage.badRequest("Member not created");
+        }else {
+            return ResponseMessage.created(MemberResponseDTO.fromMember(member1), "Member created successfully");
+        }
+    }
 }
