@@ -64,4 +64,10 @@ public class MemberController {
             return ResponseMessage.ok(MemberResponseDTO.fromMember(member1), "Member updated successfully");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteMember(@PathVariable Long id) {
+        memberService.deleteMember(id);
+        return ResponseMessage.ok(null,"Member deleted successfully");
+    }
 }
