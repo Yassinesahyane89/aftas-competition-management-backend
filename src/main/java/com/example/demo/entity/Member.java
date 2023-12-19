@@ -44,6 +44,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Ranking> ranking;
 
+    @OneToMany(mappedBy = "member")
+    private List<Hunting> hunting;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)

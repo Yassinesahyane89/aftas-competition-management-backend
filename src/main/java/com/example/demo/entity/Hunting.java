@@ -22,4 +22,7 @@ public class Hunting {
 
     @ManyToOne
     private Competition competition;
+
+    @ManyToOne
+    private Member member;
 }
