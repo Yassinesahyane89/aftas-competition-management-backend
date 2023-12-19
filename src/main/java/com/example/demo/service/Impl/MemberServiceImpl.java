@@ -6,6 +6,7 @@ import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,7 +33,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member addMember(Member member) {
-        return null;
+        // add access date and it's date of today
+        member.setAccessDate(LocalDate.now());
+
+        // add identity number do UUId
+        member.setIdentityNumber(java.util.UUID.randomUUID().toString());
+
+        // add membership number integer and must be unique
+        member.setMembershipNumber((int) (memberRepository.count() + 1));
+
+        return memberRepository.save(member);
     }
 
     @Override
