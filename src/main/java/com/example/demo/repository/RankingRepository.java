@@ -5,5 +5,5 @@ import com.example.demo.entity.Ranking;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RankingRepository extends JpaRepository<Ranking, RankId> {
-
+    Ranking findAllByMemberMembershipNumberAndCompetitionCode(Long memberNumber, String competitionCode);
 }
