@@ -51,6 +51,7 @@ public class FishServiceImpl implements FishService {
             throw new ResourceNotFountException("Fish name " + fish.getName() + " already exist");
         }
         existingFish.setName(fish.getName());
+        existingFish.setAverageWeight(fish.getAverageWeight());
 
         // check if level is already exist
         if(levelService.getLevelById(fish.getLevel().getId()) == null) {
