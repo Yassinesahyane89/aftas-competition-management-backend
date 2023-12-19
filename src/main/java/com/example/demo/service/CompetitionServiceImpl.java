@@ -3,10 +3,16 @@ package com.example.demo.service;
 import com.example.demo.entity.Competition;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Ranking;
+import com.example.demo.repository.CompetitionRepository;
 
 import java.util.List;
 
 public class CompetitionServiceImpl implements CompetitionService {
+    private final CompetitionRepository competitionRepository;
+
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository) {
+        this.competitionRepository = competitionRepository;
+    }
     @Override
     public Competition getCompetitionById(Long id) {
         return null;
