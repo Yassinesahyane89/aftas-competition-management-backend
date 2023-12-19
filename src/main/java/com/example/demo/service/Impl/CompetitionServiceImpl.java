@@ -63,7 +63,44 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Competition updateCompetition(Competition competition, Long id) {
-        return null;
+        // check if the competition exist
+        Competition existingCompetition = getCompetitionById(id);
+
+        // check if the competition is in the same date
+        if(!competition.getDate().equals(existingCompetition.getDate())){
+            // check if the competition is in the same date
+            if(competitionRepository.findByDate(competition.getDate()) != null){
+                throw new OperationException("Competition in the same date already exist");
+            }
+
+            //check if the competition is in the future date at least 1 day
+            if(competition.getDate().isBefore(LocalDate.now().plusDays(1))){
+                throw new OperationException("Competition date must be at least 1 day from now");
+            }
+        }
+        // set date
+        existingCompetition.setDate(competition.getDate());
+
+        // chek if the end time is after the start time
+        if(competition.getEndTime().isBefore(competition.getStartTime())){
+            throw new OperationException("Competition end time must be after the start time");
+        }
+
+        // set start time and end time
+        existingCompetition.setStartTime(competition.getStartTime());
+        existingCompetition.setEndTime(competition.getEndTime());
+
+        // set location
+        existingCompetition.setLocation(competition.getLocation());
+
+        // set amount
+        existingCompetition.setAmount(competition.getAmount());
+
+        //set numberOfParticipants
+        existingCompetition.setNumberOfParticipants(competition.getNumberOfParticipants());
+
+        //  save
+        return competitionRepository.save(existingCompetition);
     }
 
     @Override
