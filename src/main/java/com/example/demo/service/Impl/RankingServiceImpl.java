@@ -66,18 +66,4 @@ public class RankingServiceImpl implements RankingService {
         // delete the ranking
         rankingRepository.deleteById(new RankId(memberNumber, competitionCode));
     }
-
-    @Override
-    public List<Ranking> getRankingsByCompetitionCode(String competitionCode) {
-        List<Ranking> rankings = rankingRepository.findAllByCompetitionCode(competitionCode);
-        if (rankings == null) {
-            throw new ResourceNotFountException("Rankings for competition code " + competitionCode + " not found");
-        }
-        return rankings;
-    }
-
-    @Override
-    public List<Ranking> getRankingsByMemberNumber(Long memberNumber) {
-        return null;
-    }
 }

@@ -11,7 +11,5 @@ public interface RankingService {
     Ranking updateRanking(Ranking ranking, String competitionCode, Long memberNumber);
     List<Ranking> updateRankOfMemberInCompetition(String competitionCode);
     void deleteRanking(String competitionCode, Long memberNumber);
-    List<Ranking> getRankingsByCompetitionCode(String competitionCode);
-    List<Ranking> getRankingsByMemberNumber(Long memberNumber);
 
 }
