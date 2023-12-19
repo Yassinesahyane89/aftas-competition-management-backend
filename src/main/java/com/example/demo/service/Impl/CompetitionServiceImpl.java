@@ -99,13 +99,17 @@ public class CompetitionServiceImpl implements CompetitionService {
         //set numberOfParticipants
         existingCompetition.setNumberOfParticipants(competition.getNumberOfParticipants());
 
-        //  save
+        //  save the competition
         return competitionRepository.save(existingCompetition);
     }
 
     @Override
     public void deleteCompetition(Long id) {
+        // check if the competition exist
+        Competition existingCompetition = getCompetitionById(id);
 
+        // delete the competition
+        competitionRepository.delete(existingCompetition);
     }
 
     @Override
