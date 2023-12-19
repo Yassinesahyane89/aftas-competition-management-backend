@@ -9,11 +9,13 @@ import com.example.demo.repository.CompetitionRepository;
 import com.example.demo.service.CompetitionService;
 import com.example.demo.service.MemberService;
 import com.example.demo.service.RankingService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Service
 public class CompetitionServiceImpl implements CompetitionService {
     private final CompetitionRepository competitionRepository;
     private final MemberService memberService;
