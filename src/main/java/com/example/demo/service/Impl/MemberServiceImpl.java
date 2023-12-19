@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> findByFirstNameOrMembershipNumberOrFamilyName(String searchTerm) {
-        return null;
+        return memberRepository.findByMembershipNumberOrFirstNameOrFamilyName(searchTerm);
     }
 
     @Override
