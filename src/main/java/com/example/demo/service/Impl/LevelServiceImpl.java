@@ -31,16 +31,21 @@ public class LevelServiceImpl implements LevelService {
     @Override
     public Level addLevel(Level level) {
         List<Level> levels = getAllLevels();
+
+        // if there is no level
         if(levels.isEmpty()){
             level.setCode(1);
             return levelRepository.save(level);
         }
+
         // check if this point exist
         if(levelRepository.findByPoint(level.getPoint()) != null){
             throw new OperationException("Point already exist");
         }
+
         // get all levels that are have point greater than the new level point
         List<Level> levels1 = levelRepository.findAllByCodeGreaterThan(level.getPoint());
+
         // if there is no level with point greater than the new level point
         if(levels1.isEmpty()){
             Level lastLevel = levels.get(levels.size()-1);
@@ -55,6 +60,7 @@ public class LevelServiceImpl implements LevelService {
             levelRepository.save(level1);
         }
 
+        // save the new level
         return levelRepository.save(level);
     }
 
@@ -64,6 +70,7 @@ public class LevelServiceImpl implements LevelService {
         Level existingLevel = getLevelById(id);
         existingLevel.setDescription(level.getDescription());
 
+        // check if point is not changed
         if(existingLevel.getPoint() == level.getPoint()){
             return levelRepository.save(existingLevel);
         }
@@ -71,12 +78,13 @@ public class LevelServiceImpl implements LevelService {
         // get all levels
         List<Level> levels1 = levelRepository.findAll();
 
-        // check if point is greater than previous level and less than next level
+        // if there is only one level
         if(levels1.size()==1){
             existingLevel.setPoint(level.getPoint());
             return levelRepository.save(existingLevel);
         }
 
+        // check if point is greater than previous level and less than next level
         int index = existingLevel.getCode()-1;
         if(index==0){
             if(level.getPoint() >= levels1.get((index+1)).getPoint()) {
@@ -100,8 +108,13 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public void deleteLevel(Long id) {
+        // get the level
         Level level = getLevelById(id);
+
+        // delete the level
         levelRepository.deleteById(id);
+
+        // get all levels that are have code greater than the deleted level code
         List<Level> levels = levelRepository.findAllByCodeGreaterThan(level.getCode());
         for(Level level1: levels){
             level1.setCode(level1.getCode()-1);
