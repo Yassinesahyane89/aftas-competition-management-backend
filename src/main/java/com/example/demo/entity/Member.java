@@ -24,7 +24,7 @@ import java.util.Locale;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer membershipNumber;
+    private Long membershipNumber;
 
     private String firstName;
 
