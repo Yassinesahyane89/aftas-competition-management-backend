@@ -1,6 +1,6 @@
 package com.example.demo.service.Impl;
 
-import com.example.demo.entity.Hunting;
+import com.example.demo.entity.*;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.HuntingRepository;
 import com.example.demo.service.*;
@@ -30,7 +30,39 @@ public class HuntingServiceImpl implements HuntingService {
 
     @Override
     public Hunting addHuntingResult(Hunting hunting) {
-        return null;
+        // check if competition exist
+        Competition competition = competitionService.getCompetitionByCode(hunting.getCompetition().getCode());
+        String code = competition.getCode();
+
+        // check if member exist
+        Member member = memberService.getMemberById(hunting.getMember().getMembershipNumber());
+        Long membershipNumber = member.getMembershipNumber();
+
+        // check if fish exist
+        Fish fish = fishService.getFishById(hunting.getFish().getId());
+        Long fishId = fish.getId();
+
+        // check if Member has already participated in this competition
+        Ranking ranking = rankingService.getRankingByCompetitionCodeAndMemberNumber(code, membershipNumber);
+
+        // check weight of fish must be greater than average weight
+        if(hunting.getFish().getAverageWeight() < fish.getAverageWeight()){
+            throw new ResourceNotFountException("Weight of fish must be greater than average weight");
+        }
+
+        // save score of member in this competition
+        int score = ranking.getScore() + fish.getLevel().getPoint();
+        rankingService.updateScoreOfMemberInCompetition(code, membershipNumber, score);
+
+        // check if fish has already been caught by this member in this competition if yes acquirement the number of fish caught
+        Hunting existingHunting = huntingRepository.findByCompetitionCodeAndMemberMembershipNumberAndFishId(code, membershipNumber, fishId);
+        if(existingHunting != null){
+            existingHunting.setNumberOfHunters(existingHunting.getNumberOfHunters() + 1);
+            return huntingRepository.save(existingHunting);
+        } else {
+            hunting.setNumberOfHunters(1);
+            return huntingRepository.save(hunting);
+        }
     }
 
     @Override
