@@ -15,5 +15,5 @@ public interface CompetitionService {
     Ranking registerMemberForCompetition(Ranking ranking);
     List<Ranking> registerMembersForCompetition(List<Ranking> rankings);
     List<Member> getMembersByCompetitionId(String code);
-    List<Ranking> getRankingsByCompetitionId(Long id);
+    List<Ranking> getRankingsByCompetitionId(String code);
 }
