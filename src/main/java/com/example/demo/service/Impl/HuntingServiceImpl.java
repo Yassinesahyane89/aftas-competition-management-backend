@@ -1,0 +1,38 @@
+package com.example.demo.service.Impl;
+
+import com.example.demo.entity.Hunting;
+import com.example.demo.service.HuntingService;
+
+import java.util.List;
+
+public class HuntingServiceImpl implements HuntingService {
+    @Override
+    public Hunting getHuntingById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Hunting addHuntingResult(Hunting hunting) {
+        return null;
+    }
+
+    @Override
+    public List<Hunting> getHuntingsByCompetition(Long competitionId) {
+        return null;
+    }
+
+    @Override
+    public List<Hunting> getHuntingsByCompetitionAndMember(Long competitionId, Long memberId) {
+        return null;
+    }
+
+    @Override
+    public Hunting updateHunting(Hunting hunting, Long id) {
+        return null;
+    }
+
+    @Override
+    public void deleteHunting(Long id) {
+
+    }
+}
