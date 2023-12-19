@@ -3,10 +3,13 @@ package com.example.demo.service.Impl;
 import com.example.demo.entity.Competition;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Ranking;
+import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.CompetitionRepository;
 import com.example.demo.service.CompetitionService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CompetitionServiceImpl implements CompetitionService {
@@ -27,7 +30,35 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Competition addCompetition(Competition competition) {
-        return null;
+        // check if that there is no competition in the same date
+        if(competitionRepository.findByDate(competition.getDate()) != null){
+            throw new OperationException("Competition in the same date already exist");
+        }
+
+        //check if the competition is in the future date at least 1 day
+        if(competition.getDate().isBefore(LocalDate.now().plusDays(1))){
+            throw new OperationException("Competition date must be at least 1 day from now");
+        }
+
+        // chek if the end time is after the start time
+        if(competition.getEndTime().isBefore(competition.getStartTime())){
+            throw new OperationException("Competition end time must be after the start time");
+        }
+
+        // generate code
+        competition.setCode(generateCode(competition.getLocation(), competition.getDate()));
+
+        // save the competition
+        return competitionRepository.save(competition);
+    }
+
+    public static String generateCode(String location, LocalDate date) {
+        String locationCode = location.substring(0, 3).toLowerCase();
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yy-MM-dd");
+        String formattedDate = date.format(dateFormatter);
+
+        return locationCode + "-" + formattedDate;
     }
 
     @Override
