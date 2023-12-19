@@ -57,8 +57,8 @@ public class FishController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateFish(@RequestBody Fish fish, @PathVariable Long id) {
-        Fish updatedFish = fishService.updateFish(fish, id);
+    public ResponseEntity updateFish(@RequestBody FishRequestDTO fishRequestDTO, @PathVariable Long id) {
+        Fish updatedFish = fishService.updateFish(fishRequestDTO.toFish(), id);
         if(updatedFish == null) {
             return ResponseMessage.badRequest("Fish not updated");
         }else {
