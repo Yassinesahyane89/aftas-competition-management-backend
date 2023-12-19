@@ -66,9 +66,9 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Competition updateCompetition(Competition competition, Long id) {
+    public Competition updateCompetition(Competition competition, String code) {
         // check if the competition exist
-        Competition existingCompetition = getCompetitionById(id);
+        Competition existingCompetition = getCompetitionByCode(code);
 
         // check if the competition is in the same date
         if(!competition.getDate().equals(existingCompetition.getDate())){
@@ -108,9 +108,9 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public void deleteCompetition(Long id) {
+    public void deleteCompetition(String code) {
         // check if the competition exist
-        Competition existingCompetition = getCompetitionById(id);
+        Competition existingCompetition = getCompetitionByCode(code);
 
         // delete the competition
         competitionRepository.delete(existingCompetition);
@@ -119,7 +119,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public Ranking registerMemberForCompetition(Ranking ranking) {
         // check if the competition exist
-        Competition competition = getCompetitionById(ranking.getCompetition().getId());
+        return null;
     }
 
     @Override
@@ -128,12 +128,12 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public List<Member> getMembersByCompetitionId(Long id) {
+    public List<Member> getMembersByCompetitionId(String code) {
         return null;
     }
 
     @Override
-    public List<Ranking> getRankingsByCompetitionId(Long id) {
+    public List<Ranking> getRankingsByCompetitionId(String code) {
         return null;
     }
 }
