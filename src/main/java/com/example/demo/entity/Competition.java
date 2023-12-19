@@ -24,6 +24,7 @@ public class Competition {
     @Id
     private String code;
 
+    @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     private LocalTime startTime;
