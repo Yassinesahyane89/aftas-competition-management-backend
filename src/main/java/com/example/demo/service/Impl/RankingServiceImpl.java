@@ -39,11 +39,27 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public List<Ranking> updateRankOfMemberInCompetition(String competitionCode) {
-        return null;
+        List<Ranking> rankings = rankingRepository.findAllByCompetitionCode(competitionCode);
+
+        // check if there is any ranking for the competition
+        if(rankings == null){
+            throw new ResourceNotFountException("Rankings for competition code " + competitionCode + " not found");
+        }
+        // sort the rankings by score and update the rank
+        rankings.sort((r1, r2) -> r2.getScore().compareTo(r1.getScore()));
+
+        // update the rank
+        for(int i = 0; i < rankings.size(); i++){
+            rankings.get(i).setRank(i + 1);
+        }
+
+        // save the rankings
+        return rankingRepository.saveAll(rankings);
     }
 
     @Override
     public void deleteRanking(String competitionCode, Long memberNumber) {
+
     }
 
     @Override
