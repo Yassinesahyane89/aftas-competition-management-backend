@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.entity.Hunting;
+import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.HuntingRepository;
 import com.example.demo.service.HuntingService;
 
@@ -14,7 +15,7 @@ public class HuntingServiceImpl implements HuntingService {
     }
     @Override
     public Hunting getHuntingById(Long id) {
-        return null;
+        return huntingRepository.findById(id).orElseThrow(() -> new ResourceNotFountException("Hunting id " + id + " not found"));
     }
 
     @Override
