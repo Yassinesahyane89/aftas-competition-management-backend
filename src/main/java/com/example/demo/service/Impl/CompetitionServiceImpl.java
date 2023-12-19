@@ -173,14 +173,4 @@ public class CompetitionServiceImpl implements CompetitionService {
         // save the rankings
         return rankingService.addRankings(rankings);
     }
-
-    @Override
-    public List<Member> getMembersByCompetitionId(String code) {
-        return null;
-    }
-
-    @Override
-    public List<Ranking> getRankingsByCompetitionId(String code) {
-        return null;
-    }
 }
