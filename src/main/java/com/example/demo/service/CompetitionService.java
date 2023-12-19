@@ -14,6 +14,4 @@ public interface CompetitionService {
     void deleteCompetition(String code);
     Ranking registerMemberForCompetition(Ranking ranking);
     List<Ranking> registerMembersForCompetition(List<Ranking> rankings);
-    List<Member> getMembersByCompetitionId(String code);
-    List<Ranking> getRankingsByCompetitionId(String code);
 }
