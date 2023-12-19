@@ -7,6 +7,7 @@ import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.CompetitionRepository;
 import com.example.demo.service.CompetitionService;
+import com.example.demo.service.MemberService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class CompetitionServiceImpl implements CompetitionService {
     private final CompetitionRepository competitionRepository;
+    private final MemberService memberService;
 
-    public CompetitionServiceImpl(CompetitionRepository competitionRepository) {
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository, MemberService memberService) {
         this.competitionRepository = competitionRepository;
+        this.memberService = memberService;
     }
     @Override
     public Competition getCompetitionByCode(String code) {
@@ -119,6 +122,21 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public Ranking registerMemberForCompetition(Ranking ranking) {
         // check if the competition exist
+        Competition competition = getCompetitionByCode(ranking.getCompetition().getCode());
+
+        // check if the member exist
+        Member member = memberService.getMemberById(ranking.getMember().getMembershipNumber());
+
+        // check if the member is already registered for the competition
+        if(competition.getRanking().stream().anyMatch(ranking1 -> ranking1.getMember().getMembershipNumber().equals(member.getMembershipNumber()))){
+            throw new OperationException("Member already registered for the competition");
+        }
+
+        // check if the competition is in the future date at least 1 day
+        if(competition.getStartTime().isBefore(competition.getStartTime().minusHours(24))){
+            throw new OperationException("You can not register for competition that is less than 1 day from now");
+        }
+
         return null;
     }
 
