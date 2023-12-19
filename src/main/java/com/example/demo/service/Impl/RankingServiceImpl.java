@@ -39,8 +39,15 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Ranking updateRanking(Ranking ranking, String competitionCode, Long memberNumber) {
-        return null;
+    public Ranking updateScoreOfMemberInCompetition(String competitionCode, Long memberNumber, Integer score) {
+        // check if the ranking exist
+        Ranking ranking = getRankingByCompetitionCodeAndMemberNumber(competitionCode, memberNumber);
+
+        // update the score
+        ranking.setScore(score);
+
+        // save the ranking
+        return rankingRepository.save(ranking);
     }
 
     @Override
