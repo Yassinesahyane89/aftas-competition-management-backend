@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +27,9 @@ public class Fish {
     private String name;
 
     private double averageWeight;
+
+    @OneToMany(mappedBy = "fish")
+    private List<Hunting> hunting;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

@@ -25,4 +25,7 @@ public class Hunting {
 
     @ManyToOne
     private Member member;
+
+    @ManyToOne
+    private Fish fish;
 }
