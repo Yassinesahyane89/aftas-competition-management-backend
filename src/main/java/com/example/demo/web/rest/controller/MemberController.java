@@ -45,6 +45,20 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity searchMember(@RequestBody String searchTerm) {
+        List<Member> members = memberService.findByFirstNameOrMembershipNumberOrFamilyName(searchTerm);
+        if(members.isEmpty()) {
+            return ResponseMessage.notFound("Member not found");
+        }else {
+            List<MemberResponseDTO> memberResponseDTOS = new ArrayList<>();
+            members.forEach(member -> {
+                memberResponseDTOS.add(MemberResponseDTO.fromMember(member));
+            });
+            return ResponseMessage.ok(memberResponseDTOS, "Success");
+        }
+    }
+
     @PostMapping
     public ResponseEntity addMember(@RequestBody Member member) {
         Member member1 = memberService.addMember(member);
