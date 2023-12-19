@@ -6,10 +6,7 @@ import com.example.demo.service.MemberService;
 import com.example.demo.web.DTO.response.MemberResponseDTO;
 import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +32,16 @@ public class MemberController {
                 memberResponseDTOS.add(MemberResponseDTO.fromMember(member));
             });
             return ResponseMessage.ok(memberResponseDTOS, "Success");
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getMemberById(@PathVariable Long id) {
+        Member member = memberService.getMemberById(id);
+        if(member == null) {
+            return ResponseMessage.notFound("Member not found");
+        }else {
+            return ResponseMessage.ok(MemberResponseDTO.fromMember(member), "Success");
         }
     }
 }
