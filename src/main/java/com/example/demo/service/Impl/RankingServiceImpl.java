@@ -34,6 +34,11 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
+    public List<Ranking> addRankings(List<Ranking> rankings) {
+        return rankingRepository.saveAll(rankings);
+    }
+
+    @Override
     public Ranking updateRanking(Ranking ranking, String competitionCode, Long memberNumber) {
         return null;
     }
