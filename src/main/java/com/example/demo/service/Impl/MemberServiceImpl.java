@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> getAllMembers() {
-        return null;
+        return memberRepository.findAll();
     }
 
     @Override
