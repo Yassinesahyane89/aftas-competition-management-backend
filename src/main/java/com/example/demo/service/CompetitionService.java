@@ -7,7 +7,7 @@ import com.example.demo.entity.Ranking;
 import java.util.List;
 
 public interface CompetitionService {
-    Competition getCompetitionById(Long id);
+    Competition getCompetitionByCode(String code);
     List<Competition> getAllCompetitions();
     Competition addCompetition(Competition competition);
     Competition updateCompetition(Competition competition, Long id);
