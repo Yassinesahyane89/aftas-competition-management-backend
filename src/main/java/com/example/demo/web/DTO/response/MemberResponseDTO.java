@@ -9,7 +9,7 @@ public record MemberResponseDTO(
         String FullName,
         String nationality,
         LocalDate accessDate,
-        String IdentityDocumentType
+        String identityDocumentType
 
 ) {
        public static MemberResponseDTO fromMember(Member member) {
