@@ -37,4 +37,15 @@ public class CompetitionContoller {
             return ResponseMessage.ok(competitionResponseDTOS, "Success");
         }
     }
+
+    //get competition by code
+    @GetMapping("/{code}")
+    public ResponseEntity getCompetitionByCode(String code) {
+        Competition competition = competitionService.getCompetitionByCode(code);
+        if(competition == null) {
+            return ResponseMessage.notFound("Competition not found");
+        }else {
+            return ResponseMessage.ok(CompetitionResponseDTO.fromCompetition(competition), "Success");
+        }
+    }
 }
