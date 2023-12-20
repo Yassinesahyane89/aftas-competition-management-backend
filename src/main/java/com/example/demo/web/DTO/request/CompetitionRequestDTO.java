@@ -22,12 +22,10 @@ public record CompetitionRequestDTO(
         @NotNull(message = "End time cannot be null")
         LocalTime endTime,
 
-        @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Number of participants cannot be null")
         @Positive(message = "Number of participants must be positive")
         Integer numberOfParticipants,
 
-        @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Location cannot be null")
         @Size(min = 3, max = 50, message = "Location must be between 3 and 50 characters")
         String location,
