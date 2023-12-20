@@ -11,7 +11,8 @@ public record CompetitionResponseDTO(
         String startTime,
         String endTime,
         int numberOfParticipants,
-        String location
+        String location,
+        int amount
 ) {
     public static CompetitionResponseDTO fromCompetition(Competition competition) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.US);
@@ -22,7 +23,8 @@ public record CompetitionResponseDTO(
                 competition.getStartTime().format(timeFormatter),
                 competition.getEndTime().format(timeFormatter),
                 competition.getNumberOfParticipants(),
-                competition.getLocation()
+                competition.getLocation(),
+                competition.getAmount()
         );
     }
 }
