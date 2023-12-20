@@ -10,11 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record CompetitionRequestDTO(
-        @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Date cannot be null")
         LocalDate date,
 
-        @NotBlank(message = "Start time cannot be blank")
         @NotNull(message = "Start time cannot be null")
         LocalTime startTime,
 
