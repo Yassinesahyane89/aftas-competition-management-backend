@@ -15,7 +15,7 @@ public record RegisterMembersRequestDTO(
 
         @NotNull(message = "Member IDs cannot be null")
         @Size(min = 1, message = "Member IDs cannot be empty")
-        Long[] memberIds
+            Long[] memberIds
 ) {
     public List<Ranking> toRanking() {
         List<Ranking> rankings = new ArrayList<>();
