@@ -25,7 +25,7 @@ public record CompetitionRequestDTO(
         @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Number of participants cannot be null")
         @Positive(message = "Number of participants must be positive")
-        int numberOfParticipants,
+        Integer numberOfParticipants,
 
         @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Location cannot be null")
@@ -35,7 +35,7 @@ public record CompetitionRequestDTO(
         @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Amount cannot be null")
         @Positive(message = "Amount must be positive")
-        int amount
+        Integer amount
 ) {
         public Competition toCompetition() {
                 return Competition.builder()
