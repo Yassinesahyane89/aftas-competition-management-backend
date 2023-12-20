@@ -16,7 +16,6 @@ public record CompetitionRequestDTO(
         @NotNull(message = "Start time cannot be null")
         LocalTime startTime,
 
-        @NotBlank(message = "End time cannot be blank")
         @NotNull(message = "End time cannot be null")
         LocalTime endTime,
 
