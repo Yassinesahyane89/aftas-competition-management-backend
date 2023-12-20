@@ -5,7 +5,7 @@ import com.example.demo.entity.Member;
 import java.time.LocalDate;
 
 public record MemberResponseDTO(
-        Integer membershipNumber,
+        Long membershipNumber,
         String FullName,
         String nationality,
         LocalDate accessDate,
