@@ -1,9 +1,11 @@
 package com.example.demo.web.rest.controller;
 
 import com.example.demo.entity.Competition;
+import com.example.demo.entity.Ranking;
 import com.example.demo.handler.response.ResponseMessage;
 import com.example.demo.service.CompetitionService;
 import com.example.demo.web.DTO.request.CompetitionRequestDTO;
+import com.example.demo.web.DTO.request.RegisterMembersRequestDTO;
 import com.example.demo.web.DTO.response.CompetitionResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +69,17 @@ public class CompetitionContoller {
             return ResponseMessage.badRequest("Competition not updated");
         }else {
             return ResponseMessage.ok(CompetitionResponseDTO.fromCompetition(updatedCompetition), "Competition updated successfully");
+        }
+    }
+
+    // register members to competition
+    @PostMapping("/{code}/members")
+    public ResponseEntity registerMembersToCompetition(@PathVariable String code, @RequestBody RegisterMembersRequestDTO rankings) {
+        List<Ranking> rankings1 = competitionService.registerMembersForCompetition(rankings.toRanking());
+        if(rankings1 == null) {
+            return ResponseMessage.badRequest("Members not registered");
+        }else {
+            return ResponseMessage.created(rankings1, "Members registered successfully");
         }
     }
 }
