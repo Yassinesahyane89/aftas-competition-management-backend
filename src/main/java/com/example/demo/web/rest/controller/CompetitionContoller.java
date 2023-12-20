@@ -41,7 +41,7 @@ public class CompetitionContoller {
 
     //get competition by code
     @GetMapping("/{code}")
-    public ResponseEntity getCompetitionByCode(String code) {
+    public ResponseEntity getCompetitionByCode( @PathVariable String code) {
         Competition competition = competitionService.getCompetitionByCode(code);
         if(competition == null) {
             return ResponseMessage.notFound("Competition not found");
