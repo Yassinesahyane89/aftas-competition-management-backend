@@ -7,6 +7,7 @@ import com.example.demo.service.CompetitionService;
 import com.example.demo.web.DTO.request.CompetitionRequestDTO;
 import com.example.demo.web.DTO.request.RegisterMembersRequestDTO;
 import com.example.demo.web.DTO.response.CompetitionResponseDTO;
+import com.example.demo.web.DTO.response.CompetitionUpdateResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class CompetitionContoller {
         if(competition == null) {
             return ResponseMessage.notFound("Competition not found");
         }else {
-            return ResponseMessage.ok(CompetitionResponseDTO.fromCompetition(competition), "Success");
+            return ResponseMessage.ok(CompetitionUpdateResponseDTO.fromCompetition(competition), "Success");
         }
     }
 
