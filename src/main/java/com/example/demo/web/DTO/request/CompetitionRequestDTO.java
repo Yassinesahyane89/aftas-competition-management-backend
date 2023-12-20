@@ -30,7 +30,6 @@ public record CompetitionRequestDTO(
         @Size(min = 3, max = 50, message = "Location must be between 3 and 50 characters")
         String location,
 
-        @NotBlank(message = "Name cannot be blank")
         @NotNull(message = "Amount cannot be null")
         @Positive(message = "Amount must be positive")
         Integer amount
