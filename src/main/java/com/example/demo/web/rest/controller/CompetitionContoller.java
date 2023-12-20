@@ -58,4 +58,15 @@ public class CompetitionContoller {
             return ResponseMessage.created(CompetitionResponseDTO.fromCompetition(newCompetition), "Competition created successfully");
         }
     }
+
+    // update competition
+    @PutMapping("/{code}")
+    public ResponseEntity updateCompetition(@PathVariable String code, @Valid @RequestBody CompetitionRequestDTO competitionRequestDTO) {
+        Competition updatedCompetition = competitionService.updateCompetition(competitionRequestDTO.toCompetition(),code);
+        if(updatedCompetition == null) {
+            return ResponseMessage.badRequest("Competition not updated");
+        }else {
+            return ResponseMessage.ok(CompetitionResponseDTO.fromCompetition(updatedCompetition), "Competition updated successfully");
+        }
+    }
 }
