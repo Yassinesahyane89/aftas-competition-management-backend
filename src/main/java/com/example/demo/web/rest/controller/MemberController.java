@@ -86,4 +86,34 @@ public class MemberController {
         memberService.deleteMember(id);
         return ResponseMessage.ok(null,"Member deleted successfully");
     }
+
+    //get all members that are not in competition
+    @GetMapping("/not-in-competition/{code}")
+    public ResponseEntity getMembersNotInCompetition(@PathVariable String code) {
+        List<Member> members = memberService.getMembersNotInCompetition(code);
+        if(members.isEmpty()) {
+            return ResponseMessage.notFound("Member not found");
+        }else {
+            List<MemberResponseDTO> memberResponseDTOS = new ArrayList<>();
+            members.forEach(member -> {
+                memberResponseDTOS.add(MemberResponseDTO.fromMember(member));
+            });
+            return ResponseMessage.ok(memberResponseDTOS, "Success");
+        }
+    }
+
+    //get all members that are in competition
+    @GetMapping("/in-competition/{code}")
+    public ResponseEntity getMembersInCompetition(@PathVariable String code) {
+        List<Member> members = memberService.getMembersByCompetitionCode(code);
+        if(members.isEmpty()) {
+            return ResponseMessage.notFound("Member not found");
+        }else {
+            List<MemberResponseDTO> memberResponseDTOS = new ArrayList<>();
+            members.forEach(member -> {
+                memberResponseDTOS.add(MemberResponseDTO.fromMember(member));
+            });
+            return ResponseMessage.ok(memberResponseDTOS, "Success");
+        }
+    }
 }
