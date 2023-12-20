@@ -5,9 +5,11 @@ import com.example.demo.entity.Ranking;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.RankingRepository;
 import com.example.demo.service.RankingService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RankingServiceImpl implements RankingService {
     private final RankingRepository rankingRepository;
 
