@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,9 @@ public class Competition {
     @Temporal(TemporalType.DATE)
     private LocalDate date;
 
+    @Temporal(TemporalType.DATE)
+    private LocalDate endDate;
+
     private LocalTime startTime;
 
     private LocalTime endTime;
@@ -37,19 +41,20 @@ public class Competition {
 
     private int amount;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "competition")
     private List<Ranking> ranking;
 
     @OneToMany(mappedBy = "competition")
     private List<Hunting> hunting;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updatedAt;
+//    @CreationTimestamp
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @Column(nullable = true)
+//    private Date createdAt;
+//
+//    @UpdateTimestamp
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @Column(nullable = true)
+//    private Date updatedAt;
 }

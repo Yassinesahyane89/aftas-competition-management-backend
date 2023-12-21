@@ -10,7 +10,11 @@ public interface RankingService {
     Ranking addRanking(Ranking ranking);
     List<Ranking> addRankings(List<Ranking> rankings);
     Ranking updateScoreOfMemberInCompetition(String competitionCode, Long memberNumber, Integer score);
-    List<Ranking> updateRankOfMemberInCompetition(String competitionCode);
     void deleteRanking(String competitionCode, Long memberNumber);
 
+    // find all ranking by competition code
+    List<Ranking> findAllByCompetitionCode(String competitionCode);
+
+    // save all rankings
+    List<Ranking> saveAll(List<Ranking> rankings);
 }

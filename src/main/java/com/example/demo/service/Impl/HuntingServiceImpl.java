@@ -1,11 +1,13 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.entity.*;
+import com.example.demo.handler.exception.OperationException;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.HuntingRepository;
 import com.example.demo.service.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,6 +35,17 @@ public class HuntingServiceImpl implements HuntingService {
         // check if competition exist
         Competition competition = competitionService.getCompetitionByCode(hunting.getCompetition().getCode());
         String code = competition.getCode();
+
+        // check if competition is open by checking the date of competition
+        //if(competition.getDate().isBefore(LocalDate.now().plusDays(1))){
+        //    throw new OperationException("Competition is closed");
+        //}
+        // if competition is not end yet we can't add hunting result
+        if(competition.getDate().isAfter(LocalDate.now())){
+            throw new OperationException("Competition is not end yet");
+        }
+
+
 
         // check if member exist
         Member member = memberService.getMemberById(hunting.getMember().getMembershipNumber());

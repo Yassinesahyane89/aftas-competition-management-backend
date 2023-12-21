@@ -10,12 +10,11 @@ import jakarta.validation.constraints.Positive;
 
 public record HuntingRequestDTO(
         @NotNull(message = "averageWeight is required")
-        @NotBlank(message = "averageWeight cannot be blank")
         @Positive(message = "averageWeight must be positive")
         Double averageWeight,
 
         @NotNull(message = "FishId is required")
-        Long FishId,
+        Long fishId,
 
         @NotNull(message = "MemberId is required")
         Long membershipNumber,
@@ -25,7 +24,7 @@ public record HuntingRequestDTO(
 ) {
     public Hunting toHunting() {
         return Hunting.builder()
-                .fish(Fish.builder().id(FishId).averageWeight(averageWeight).build())
+                .fish(Fish.builder().id(fishId).averageWeight(averageWeight).build())
                 .member(Member.builder().membershipNumber(membershipNumber).build())
                 .competition(Competition.builder().code(code).build())
                 .build();

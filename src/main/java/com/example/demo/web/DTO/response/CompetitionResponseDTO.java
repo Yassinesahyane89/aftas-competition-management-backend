@@ -8,6 +8,7 @@ import java.util.Locale;
 public record CompetitionResponseDTO(
         String code,
         String date,
+        String endDate,
         String startTime,
         String endTime,
         int numberOfParticipants,
@@ -20,6 +21,7 @@ public record CompetitionResponseDTO(
         return new CompetitionResponseDTO(
                 competition.getCode(),
                 competition.getDate().format(dateFormatter),
+                competition.getEndDate().format(dateFormatter),
                 competition.getStartTime().format(timeFormatter),
                 competition.getEndTime().format(timeFormatter),
                 competition.getNumberOfParticipants(),

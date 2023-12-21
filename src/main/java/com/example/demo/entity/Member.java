@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.enums.IdentityDocumentType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,9 +42,11 @@ public class Member {
     @Column(unique = true)
     private String identityNumber;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "member")
     private List<Ranking> ranking;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "member")
     private List<Hunting> hunting;
 

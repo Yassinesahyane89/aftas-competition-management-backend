@@ -4,6 +4,8 @@ import com.example.demo.entity.RankId;
 import com.example.demo.entity.Ranking;
 import com.example.demo.handler.exception.ResourceNotFountException;
 import com.example.demo.repository.RankingRepository;
+import com.example.demo.service.CompetitionService;
+import com.example.demo.service.MemberService;
 import com.example.demo.service.RankingService;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Ranking addRanking(Ranking ranking) {
-        return null;
+        return rankingRepository.save(ranking);
     }
 
     @Override
@@ -42,6 +44,7 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Ranking updateScoreOfMemberInCompetition(String competitionCode, Long memberNumber, Integer score) {
+        //check that tha competition exist
         // check if the ranking exist
         Ranking ranking = getRankingByCompetitionCodeAndMemberNumber(competitionCode, memberNumber);
 
@@ -53,31 +56,23 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public List<Ranking> updateRankOfMemberInCompetition(String competitionCode) {
-        List<Ranking> rankings = rankingRepository.findAllByCompetitionCode(competitionCode);
-
-        // check if there is any ranking for the competition
-        if(rankings == null){
-            throw new ResourceNotFountException("Rankings for competition code " + competitionCode + " not found");
-        }
-        // sort the rankings by score and update the rank
-        rankings.sort((r1, r2) -> r2.getScore().compareTo(r1.getScore()));
-
-        // update the rank
-        for(int i = 0; i < rankings.size(); i++){
-            rankings.get(i).setRank(i + 1);
-        }
-
-        // save the rankings
-        return rankingRepository.saveAll(rankings);
-    }
-
-    @Override
     public void deleteRanking(String competitionCode, Long memberNumber) {
         // check if the ranking exist
         getRankingByCompetitionCodeAndMemberNumber(competitionCode, memberNumber);
 
         // delete the ranking
         rankingRepository.deleteById(new RankId(memberNumber, competitionCode));
+    }
+
+    // find all ranking by competition code
+    @Override
+    public List<Ranking> findAllByCompetitionCode(String competitionCode) {
+        return rankingRepository.findAllByCompetitionCode(competitionCode);
+    }
+
+    // save all ranking
+    @Override
+    public List<Ranking> saveAll(List<Ranking> rankings) {
+        return rankingRepository.saveAll(rankings);
     }
 }

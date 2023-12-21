@@ -10,8 +10,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record CompetitionRequestDTO(
-        @NotNull(message = "Date cannot be null")
-        LocalDate date,
+        @NotNull(message = "Start Date cannot be null")
+        LocalDate startDate,
+
+        @NotNull(message = "End Date cannot be null")
+        LocalDate endDate,
 
         @NotNull(message = "Start time cannot be null")
         LocalTime startTime,
@@ -33,7 +36,8 @@ public record CompetitionRequestDTO(
 ) {
         public Competition toCompetition() {
                 return Competition.builder()
-                        .date(date())
+                        .date(startDate())
+                        .endDate(endDate())
                         .startTime(startTime())
                         .endTime(endTime())
                         .numberOfParticipants(numberOfParticipants())
